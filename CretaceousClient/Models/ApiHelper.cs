@@ -25,7 +25,7 @@ namespace CretaceousClient.Models
 
     public static async void Post(string newAnimal)
     {
-      RestClient client = new RestClient("https://localhost:5000/");
+      RestClient client = new RestClient("http://localhost:5000/");
       RestRequest request = new RestRequest($"api/animals/", Method.Post);
       
       request.AddHeader("Content-Type", "application/json");
@@ -40,6 +40,14 @@ namespace CretaceousClient.Models
       request.AddHeader("Content-Type", "application/json");
       request.AddJsonBody(newAnimal);
       await client.PutAsync(request);
+    }
+
+    public static async void Delete(int id)
+    {
+      RestClient client = new RestClient("http://localhost:5000/");
+      RestRequest request = new RestRequest($"api/animals/{id}");
+      request.AddHeader("Content-Type", "application/json");
+      await client.DeleteAsync(request);
     }
   }
 }
